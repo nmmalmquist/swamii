@@ -1,0 +1,14 @@
+.button{
+    background-color: white;
+    border-radius: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: box-shadow .3s;
+}
+/* Not sure how to make box shadow work */
+.button:hover{
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
