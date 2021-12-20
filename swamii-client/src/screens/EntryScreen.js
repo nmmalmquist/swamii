@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import styles from "../css/cssScreens/entry-screen.module.css";
 
@@ -8,6 +9,7 @@ import AppText from "../components/generic/AppText";
 import AppButton from "../components/generic/AppButton";
 
 function EntryScreen(props) {
+  const navigate = useNavigate();
   return (
     <Container className={styles.mainContainer}>
       <Container className={styles.logoContainer}>
@@ -15,10 +17,10 @@ function EntryScreen(props) {
       </Container>
       <Container className={styles.buttonContainer}>
         <Container className={styles.button}>
-          <AppButton title="Log In" />
+          <AppButton title="Log In" onClick={() => navigate("/login")} />
         </Container>
         <Container className={styles.button}>
-          <AppButton title="Register to Play" />
+          <AppButton title="Register to Play" onClick={() => navigate("/register")} />
         </Container>
       </Container>
     </Container>

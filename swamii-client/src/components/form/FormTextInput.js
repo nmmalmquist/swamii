@@ -12,7 +12,7 @@ function FormTextInput({ name, ...otherTextInputProps }) {
   return (
     <div>
       <AppTextInput
-        onChange={(event) => {setFieldValue(name, event.target.value); console.log(values)}}
+        onChange={(event) => setFieldValue(name, event.target.value) }
         value={values[name]}
         onBlur={() => setFieldTouched(name)}
         {...otherTextInputProps}

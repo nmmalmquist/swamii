@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_DOMAIN = "http://192.168.1.19:5000";
 
-const validateAndLoginUser = async ({ username, password }) => {
+const validateUser = async ({ username, password }) => {
   const url = `${BASE_DOMAIN}/api/auth/user/login`;
 
   const response = await axios.post(url, {
@@ -42,4 +42,4 @@ const createNewUser = async ({
   return response.data;
 };
 
-export { validateAndLoginUser, createNewUser };
+export { validateUser, createNewUser };

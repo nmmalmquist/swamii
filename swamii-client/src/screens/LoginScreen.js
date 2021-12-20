@@ -5,11 +5,13 @@ import * as Yup from "yup";
 import styles from "../css/cssScreens/login-screen.module.css";
 
 import logo from "../assets/logos/blue-logo.png";
-import FormTextInput from "../components/form/FromTextInput";
+import FormTextInput from "../components/form/FormTextInput";
 import AppForm from "../components/form/AppForm";
 import SubmitFormButton from "../components/form/SubmitFormButton";
-import { validateAndLoginUser } from "../api/auth";
+import { validateUser } from "../api/auth";
 import AppErrorMessage from "../components/form/FormErrorMessage";
+import useAuth from "../auth/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const yupValidationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -18,14 +20,22 @@ const yupValidationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const [validCredentials, setValidCredentials] = useState(true);
+  const {login} = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async ({ username, password }) => {
+    //validation in backend
     try {
-      const response = await validateAndLoginUser({
+      const token = await validateUser({
         username: username.toLowerCase(),
         password: password,
       });
+      //stores token in localStorage
+      login(token)
+
       setValidCredentials(true)
+      //go to home page
+      navigate("/")
     } catch (error) {
         console.log(error);
         setValidCredentials(false)
