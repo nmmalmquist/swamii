@@ -1,40 +1,72 @@
 import jwtDecode from "jwt-decode";
 
-const KEY = "swamiiAuthToken";
+const USER_KEY = "swamiiUserAuthToken";
+const ADMIN_KEY = "swamiiAdminAuthToken";
 
-const storeToken = (authToken) => {
-    console.log("store: " + authToken)
+const storeUserToken = (authToken) => {
     try {
-        window.localStorage.setItem(KEY, authToken);
+        window.localStorage.setItem(USER_KEY, authToken);
     } catch (error) {
         console.log("error storing auth-token")
     }
 };
 
-const getToken = () => {
+const getUserToken = () => {
     try {
-        return window.localStorage.getItem(KEY);
+        return window.localStorage.getItem(USER_KEY);
     } catch (error) {
         console.log("could not get auth-token")
     }
 };
 
 const getUserFromToken = () => {
-    const token = getToken();
+    const token = getUserToken();
     return token ? jwtDecode(token) : null;
   };
 
-const deleteToken = () => {
+const deleteUserToken = () => {
     try {
-        window.localStorage.removeItem(KEY);
+        window.localStorage.removeItem(USER_KEY);
+    } catch (error) {
+        console.log("could not delete auth-token")
+    }
+};
+const storeAdminToken = (authToken) => {
+    try {
+        window.sessionStorage.setItem(ADMIN_KEY, authToken);
+    } catch (error) {
+        console.log("error storing auth-token")
+    }
+};
+
+const getAdminToken = () => {
+    try {
+        return window.sessionStorage.getItem(ADMIN_KEY);
+    } catch (error) {
+        console.log("could not get auth-token")
+    }
+};
+
+const getAdminFromToken = () => {
+    const token = getAdminToken();
+    return token ? jwtDecode(token) : null;
+  };
+
+const deleteAdminToken = () => {
+    try {
+        window.sessionStorage.removeItem(ADMIN_KEY);
     } catch (error) {
         console.log("could not delete auth-token")
     }
 };
 
 export {
-    storeToken,
+    storeUserToken,
     getUserFromToken,
-    deleteToken,
-    getToken,
+    deleteUserToken,
+    getUserToken,
+    storeAdminToken,
+    getAdminFromToken,
+    deleteAdminToken,
+    getAdminToken,
   };

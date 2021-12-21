@@ -8,7 +8,7 @@ import logo from "../assets/logos/blue-logo.png";
 import FormTextInput from "../components/form/FormTextInput";
 import AppForm from "../components/form/AppForm";
 import SubmitFormButton from "../components/form/SubmitFormButton";
-import { validateUser } from "../api/auth";
+import { validateAdmin } from "../api/auth";
 import AppErrorMessage from "../components/form/FormErrorMessage";
 import useAuth from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -20,22 +20,22 @@ const yupValidationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const [validCredentials, setValidCredentials] = useState(true);
-  const {userLogin} = useAuth();
+  const {adminLogin} = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async ({ username, password }) => {
     //validation in backend
     try {
-      const token = await validateUser({
+      const token = await validateAdmin({
         username: username.toLowerCase(),
         password: password,
       });
       //stores token in localStorage
-      userLogin(token)
+      adminLogin(token)
 
       setValidCredentials(true)
       //go to home page
-      navigate("/")
+      navigate("/admin/home")
     } catch (error) {
         console.log(error);
         setValidCredentials(false)
@@ -49,7 +49,7 @@ function LoginScreen(props) {
       <Container className={styles.mainContainer}>
         <Container className={styles.contentContainerBackground}>
           <Container className={styles.contentContainer}>
-            <h2>Log in to your account</h2>
+            <h2>Admin Log In</h2>
             <AppForm
               initialValues={{ username: "", password: "" }}
               onSubmit={handleSubmit}
@@ -73,7 +73,7 @@ function LoginScreen(props) {
               </Container>
               <AppErrorMessage error="The password or username is incorrect" visible={!validCredentials}/>
               <SubmitFormButton
-                title="Log in"
+                title="Admin Log in"
                 extraStyle={styles.submitButton}
               />
             </AppForm>

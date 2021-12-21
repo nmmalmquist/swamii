@@ -23,6 +23,9 @@ function EntryScreen(props) {
           <AppButton title="Register to Play" onClick={() => navigate("/register")} />
         </Container>
       </Container>
+        <Container className={styles.button}>
+          <AppButton title="Admin Log In" onClick={() => navigate("/admin/login")} />
+        </Container>
     </Container>
   );
 }

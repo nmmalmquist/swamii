@@ -1,29 +1,43 @@
 import { useContext } from "react";
 import jwtDecode from "jwt-decode";
 
-import { createNewUser } from "../api/auth";
+import { createNewUser, createNewAdmin } from "../api/auth";
 import AuthContext from "./context";
-import { deleteToken, storeToken } from "./storage";
+import { deleteUserToken, storeUserToken, deleteAdminToken, storeAdminToken,} from "./storage";
 
 const useAuth = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, admin, setUser, setAdmin } = useContext(AuthContext);
 
-  const logout = async () => {
+  const userLogout = () => {
     setUser(null);
-    await deleteToken();
+    deleteUserToken();
   };
 
-  const login = async (authToken) => {
+  const userLogin = (authToken) => {
     setUser(jwtDecode(authToken));
-    await storeToken(authToken);
+    storeUserToken(authToken);
   };
 
-  const createAccount = async (userData) => {
+  const userCreateAccount = async (userData) => {
     const response = await createNewUser(userData);
     return response;
   };
+  const adminLogout = () => {
+    setAdmin(null);
+    deleteAdminToken();
+  };
 
-  return { user, setUser, logout, login, createAccount };
+  const adminLogin = (authToken) => {
+    setAdmin(jwtDecode(authToken));
+    storeAdminToken(authToken);
+  };
+
+  const adminCreateAccount = async (adminData) => {
+    const response = await createNewAdmin(adminData);
+    return response;
+  };
+
+  return { user, admin, setAdmin, setUser, userLogout, userLogin, userCreateAccount, adminLogout, adminLogin, adminCreateAccount };
 };
 
 export default useAuth;
