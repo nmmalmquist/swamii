@@ -2,6 +2,7 @@
     background-color: white;
     border-radius: 5px;
     height: 50px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,4 +12,14 @@
 /* Not sure how to make box shadow work */
 .button:hover{
     box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+/* removes all default HTML styling from button */
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }

@@ -44,7 +44,7 @@ function LoginScreen(props) {
   return (
     <>
       <Container className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="logo" />
+        <img className={styles.logo} src={logo} alt="logo"  onClick={()=>navigate("/entry")} />
       </Container>
       <Container className={styles.mainContainer}>
         <Container className={styles.contentContainerBackground}>

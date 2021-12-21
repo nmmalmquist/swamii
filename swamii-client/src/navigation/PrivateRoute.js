@@ -12,6 +12,7 @@ function PrivateRoute({ Component, type, ...rest }) {
     // If not, return element that will navigate to login page
     if(type === "user")
     {
+        console.log(user)
         return user ? <Outlet /> : <Navigate to="/entry" />;
     }
     if(type === "admin")

@@ -23,6 +23,7 @@
     margin: 15px;
     position: relative;
     align-self: flex-start;
+    cursor: pointer;
 }
 .textInputContainer{
 }

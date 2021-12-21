@@ -2,11 +2,11 @@ import React from 'react';
 
 import styles from "../../css/cssComponents/app-button.module.css"
 
-function AppButton({title, onClick, extraStyle}) {
+function AppButton({title, onClick, extraStyle,type, ...otherProps}) {
     return (
-        <div className={`${styles.button} ${extraStyle}`} onClick={onClick}>
+        <button type={type} className={`${styles.button} ${extraStyle}`} onClick={onClick} >
             {title}
-        </div>
+        </button>
     );
 }
 
