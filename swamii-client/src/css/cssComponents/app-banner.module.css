@@ -1,0 +1,27 @@
+.container{
+    background-color: white;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+}
+.topHR{
+    position: absolute;
+   top:0px;
+    height: 2px;
+    width: 100%;
+    background-color: black;
+    margin: 5px 0;
+}
+.bottomHR{
+    position: absolute;
+    bottom:0px;
+    background-color: black;
+    width: 100%;
+    height: 2px;
+    margin: 5px 0;
+}
+.text{
+
+}

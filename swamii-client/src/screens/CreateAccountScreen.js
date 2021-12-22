@@ -11,6 +11,7 @@ import SubmitFormButton from "../components/form/SubmitFormButton";
 import AppErrorMessage from "../components/form/FormErrorMessage";
 import useAuth from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import AppBanner from "../components/generic/AppBanner";
 
 const yupValidationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -24,27 +25,37 @@ const yupValidationSchema = Yup.object().shape({
 function CreateAccountScreen(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [passwordConfirmed, setPasswordConfirmed] = useState(true);
-  const { createAccount } = useAuth();
+  const [bannerIsVisible, setBannerIsVisible] = useState(false);
+  const { userCreateAccount } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async ({ username, email, firstName, lastName, confirmPassword, password }) => {
-    
+  const handleSubmit = async ({
+    username,
+    email,
+    firstName,
+    lastName,
+    confirmPassword,
+    password,
+  }) => {
     //Check if the password and confirm password inputs are the same
-    if (password !== confirmPassword) return setPasswordConfirmed(false)
-    setPasswordConfirmed(true)
+    if (password !== confirmPassword) return setPasswordConfirmed(false);
+    setPasswordConfirmed(true);
 
     //hits back-end api to try and create a new account. Will return a user id if successful
     try {
-      const user = await createAccount({
+      const user = await userCreateAccount({
         username: username.toLowerCase(),
         password: password,
         email: email.toLowerCase(),
         firstName: firstName.toLowerCase(),
-        lastName: lastName.toLowerCase()
+        lastName: lastName.toLowerCase(),
       });
       setErrorMessage(null);
-      alert("user: " + username + " has been created!")
-      navigate("/entry")
+      //make created account banner visible
+      setBannerIsVisible(true);
+      //after 2 seconds, return to main entry page
+      setTimeout(()=>navigate("/entry"), 2000)
+
     } catch (error) {
       console.log(error);
       setErrorMessage(error);
@@ -52,15 +63,33 @@ function CreateAccountScreen(props) {
   };
   return (
     <>
+      <AppBanner
+        visible={bannerIsVisible}
+        primaryColor="rgb(66, 114, 66)"
+        secondaryColor="white"
+        text="New Account Created!"
+      />
       <Container className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="logo"  onClick={()=>navigate("/entry")}/>
+        <img
+          className={styles.logo}
+          src={logo}
+          alt="logo"
+          onClick={() => navigate("/entry")}
+        />
       </Container>
       <Container className={styles.mainContainer}>
         <Container className={styles.contentContainerBackground}>
           <Container className={styles.contentContainer}>
             <h2>Create a Swamii Account</h2>
             <AppForm
-              initialValues={{ username: "", password: "", firstName: "", lastName: "", email: "", confirmPassword: "" }}
+              initialValues={{
+                username: "",
+                password: "",
+                firstName: "",
+                lastName: "",
+                email: "",
+                confirmPassword: "",
+              }}
               onSubmit={handleSubmit}
               validationSchema={yupValidationSchema}
             >
