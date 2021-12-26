@@ -11,21 +11,27 @@ import AppButton from "../components/generic/AppButton";
 function EntryScreen(props) {
   const navigate = useNavigate();
   return (
-    <Container className={styles.mainContainer}>
-      <Container className={styles.logoContainer}>
+    <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.mainContainer}>
+      <div className={styles.logoContainer}>
         <img src={logo} className={styles.logo} alt="Logo-pic" />
-      </Container>
-      <Container className={styles.buttonContainer}>
-        <Container className={styles.button}>
+      </div>
+      <div className={styles.buttonContainer}>
+        <div className={styles.button}>
           <AppButton title="Log In" onClick={() => navigate("/login")} />
-        </Container>
-        <Container className={styles.button}>
-          <AppButton title="Register to Play" onClick={() => navigate("/register")} />
-        </Container>
-      </Container>
-        <Container className={styles.button}>
-          <AppButton title="Admin Log In" onClick={() => navigate("/admin/login")} />
-        </Container>
+        </div>
+        <div className={styles.button}>
+          <AppButton
+            title="Register to Play"
+            onClick={() => navigate("/register")}
+          />
+        </div>
+      </div>
+      <div className={styles.button}>
+        <AppButton
+          title="Admin Log In"
+          onClick={() => navigate("/admin/login")}
+        />
+      </div>
     </Container>
   );
 }

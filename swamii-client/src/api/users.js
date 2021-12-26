@@ -9,6 +9,13 @@ const getAllUsers = async () => {
   const data = await response.data
   return data;
 };
+const getAllUsersOrderedByBalance = async () => {
+  //must use IP Address, not localhost
+  const url = `${BASE_DOMAIN}/api/users/active/ordered-by-balance`;
+  const response = await axios.get(url);
+  const data = await response.data
+  return data;
+};
 const getUser = async (username) => {
   //must use IP Address, not localhost
   const url = `${BASE_DOMAIN}/api/users/${username}`;
@@ -17,4 +24,4 @@ const getUser = async (username) => {
   return data;
 };
 
-export { getAllUsers, getUser };
+export { getAllUsers,getAllUsersOrderedByBalance, getUser };

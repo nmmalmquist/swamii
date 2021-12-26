@@ -69,7 +69,7 @@ function CreateAccountScreen(props) {
         secondaryColor="white"
         text="New Account Created!"
       />
-      <Container className={styles.logoContainer}>
+      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.logoContainer}>
         <img
           className={styles.logo}
           src={logo}
@@ -77,9 +77,9 @@ function CreateAccountScreen(props) {
           onClick={() => navigate("/entry")}
         />
       </Container>
-      <Container className={styles.mainContainer}>
-        <Container className={styles.contentContainerBackground}>
-          <Container className={styles.contentContainer}>
+      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.mainContainer}>
+        <div className={styles.contentContainerBackground}>
+          <div className={styles.contentContainer}>
             <h2>Create a Swamii Account</h2>
             <AppForm
               initialValues={{
@@ -93,54 +93,54 @@ function CreateAccountScreen(props) {
               onSubmit={handleSubmit}
               validationSchema={yupValidationSchema}
             >
-              <Container className={styles.textInputContainer}>
+              <div className={styles.textInputContainer}>
                 <FormTextInput
                   placeholder="First Name"
                   type="text"
                   label="First Name"
                   name="firstName"
                 />
-              </Container>
-              <Container className={styles.textInputContainer}>
+              </div>
+              <div className={styles.textInputContainer}>
                 <FormTextInput
                   placeholder="Last Name"
                   type="text"
                   label="Last Name"
                   name="lastName"
                 />
-              </Container>
-              <Container className={styles.textInputContainer}>
+              </div>
+              <div className={styles.textInputContainer}>
                 <FormTextInput
                   placeholder="Email"
                   type="email"
                   label="Email"
                   name="email"
                 />
-              </Container>
-              <Container className={styles.textInputContainer}>
+              </div>
+              <div className={styles.textInputContainer}>
                 <FormTextInput
                   placeholder="Username"
                   type="text"
                   label="Username"
                   name="username"
                 />
-              </Container>
-              <Container className={styles.textInputContainer}>
+              </div>
+              <div className={styles.textInputContainer}>
                 <FormTextInput
                   placeholder="Password"
                   type="password"
                   label="Password"
                   name="password"
                 />
-              </Container>
-              <Container className={styles.textInputContainer}>
+              </div>
+              <div className={styles.textInputContainer}>
                 <FormTextInput
                   placeholder="Password"
                   type="password"
                   label="Confirm Password"
                   name="confirmPassword"
                 />
-              </Container>
+              </div>
               <AppErrorMessage
                 error={errorMessage ? JSON.parse(errorMessage).message : null}
                 visible={errorMessage}
@@ -154,8 +154,8 @@ function CreateAccountScreen(props) {
                 extraStyle={styles.submitButton}
               />
             </AppForm>
-          </Container>
-        </Container>
+          </div>
+        </div>
       </Container>
     </>
   );
