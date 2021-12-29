@@ -21,7 +21,7 @@ router.get("/active", async function (req, res) {
 });
 //Get All active Users
 router.get("/active/ordered-by-balance", async function (req, res) {
-  const userList = await User.find({ deleted: false }).sort({currentBalance: "asc"});
+  const userList = await User.find({ deleted: false }).sort({currentBalance: "desc"});
   res.send(userList);
 });
 

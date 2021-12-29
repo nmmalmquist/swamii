@@ -1,0 +1,9 @@
+.lottie{
+    width: 20%;
+}
+.lottieContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}

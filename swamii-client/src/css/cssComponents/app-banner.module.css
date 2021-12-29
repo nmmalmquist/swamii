@@ -1,26 +1,31 @@
 .container{
     background-color: white;
-    height: 70px;
     display: flex;
     flex-direction: column;
+    height: 70px;
+    justify-content: center;
+    margin: 0;
+    max-width: none;
+    padding: 0;
     position: relative;
     text-align: center;
+    width: 100%;
 }
 .topHR{
-    position: absolute;
-   top:0px;
-    height: 2px;
-    width: 100%;
     background-color: black;
+    height: 2px;
     margin: 5px 0;
+    position: absolute;
+    width: 100%;
+   top:0px;
 }
 .bottomHR{
-    position: absolute;
-    bottom:0px;
     background-color: black;
-    width: 100%;
+    bottom:0px;
     height: 2px;
     margin: 5px 0;
+    position: absolute;
+    width: 100%;
 }
 .text{
 

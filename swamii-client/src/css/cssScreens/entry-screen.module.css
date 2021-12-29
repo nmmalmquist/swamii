@@ -19,9 +19,15 @@ body{
 }
 .buttonContainer{
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20vh 0 0;
+    width: 100%;
+}
+.authButtonContainer{
+    display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 20vh 0 20px;
     width: 100%;
 }
 .button{
