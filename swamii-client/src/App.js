@@ -6,6 +6,7 @@ import AuthContext from "./auth/context";
 import { getUserFromToken, getAdminFromToken } from "./auth/storage";
 import AppNavigation from "./navigation/AppNavigation";
 import loadingAnimation from "./assets/animations/loadingSquare.json";
+import NeonLogo from "./components/NeonLogo";
 
 function App() {
   const [user, setUser] = useState();
@@ -38,12 +39,17 @@ function App() {
   //This is a splash screen for the time where we restore the user and admin. Not having this with render the navigation when the user/admin has not been restored, so on refresh, the screen will always revert to /entry or /admin/login
   if (!isReady) {
     return (
-      <div style={{height: "100vh", display: "flex", flexDirection: "column", justifyContent:"center", alignItems: "center"}}>
-        <Lottie
-          style={{ width: 250}}
-          animationData={loadingAnimation}
-          />
-          <h6 style={{ fontSize: 50}}>Loading...</h6>
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Lottie style={{ width: 250 }} animationData={loadingAnimation} />
+        <h6 style={{ fontSize: 50 }}>Loading...</h6>
       </div>
     );
   }

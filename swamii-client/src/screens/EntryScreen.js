@@ -1,4 +1,4 @@
-import React,{useContext, useState} from "react";
+import React,{useContext, useState, useEffect} from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ import AppText from "../components/generic/AppText";
 import AppButton from "../components/generic/AppButton";
 import AuthContext from "../auth/context"
 import AppBanner from "../components/generic/AppBanner";
+import NeonLogo from "../components/NeonLogo";
 
 
 
@@ -16,11 +17,23 @@ function EntryScreen(props) {
   const navigate = useNavigate();
   const {user}= useContext(AuthContext);
   const [signedIn, setSignedIn] = useState(true)
+  const [logoSize, setLogoSize] = useState("14vw")
 
   const handleDahsboardButtonClick = () => {
     if (!user) return setSignedIn(false)
     navigate("/")
   }
+
+  useEffect(()=>{
+    const screenWidth = window.innerWidth;
+    if(screenWidth > 1200){
+      setLogoSize("12vw")
+    }else if (800 < screenWidth < 1199){
+      setLogoSize("20vw")
+    }else{
+      setLogoSize("18vw")
+    }
+  },[])
 
   return (
     <Container
@@ -30,7 +43,7 @@ function EntryScreen(props) {
     >
       <AppBanner visible={!signedIn} text="You must sign in before you can access the dashboard" primaryColor={"red"} secondaryColor={"white"}/>
       <div className={styles.logoContainer}>
-        <img src={logo} className={styles.logo} alt="Logo-pic" />
+        <NeonLogo backgroundColor={"black"} fontSize={logoSize}/>
       </div>
       <div className={styles.buttonContainer}>
         <div className={styles.button}>

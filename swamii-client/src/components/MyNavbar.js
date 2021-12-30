@@ -1,27 +1,30 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../css/cssComponents/navbar.module.css";
 
 import logo from "../assets/logos/blue-logo.png";
-import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../auth/context";
+import NeonLogo from "../components/NeonLogo";
 
 function MyNavbar(props) {
   const navigate = useNavigate();
-  const {setUser} = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext);
 
   const handleLogout = () => {
-    window.localStorage.removeItem("swamiiUserAuthToken")
-    setUser(null)
+    window.localStorage.removeItem("swamiiUserAuthToken");
+    setUser(null);
     console.log("logged out");
     navigate("/entry");
   };
 
   return (
-    <Navbar  variant="dark" expand="md" style={{padding: 0}}>
+    <Navbar variant="dark" expand="md" style={{ padding: 0 }}>
       <Container className={styles.container}>
-        <img src={logo} className={styles.logo} alt="Logo pic" onClick={()=>navigate("/entry")}/>
+        <div className={styles.logo}>
+          <NeonLogo backgroundColor="black" fontSize={45} />
+        </div>
         <div className={styles.leftLinksGroup}>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
@@ -51,7 +54,7 @@ function MyNavbar(props) {
             </Navbar.Collapse>
           </div>
         </div>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.toggleBtn} />
       </Container>
     </Navbar>
   );
