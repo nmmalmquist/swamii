@@ -1,4 +1,4 @@
-import React,{useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -7,33 +7,31 @@ import styles from "../css/cssScreens/entry-screen.module.css";
 import logo from "../assets/logos/gray-logo.png";
 import AppText from "../components/generic/AppText";
 import AppButton from "../components/generic/AppButton";
-import AuthContext from "../auth/context"
+import AuthContext from "../auth/context";
 import AppBanner from "../components/generic/AppBanner";
 import NeonLogo from "../components/NeonLogo";
 
-
-
 function EntryScreen(props) {
   const navigate = useNavigate();
-  const {user}= useContext(AuthContext);
-  const [signedIn, setSignedIn] = useState(true)
-  const [logoSize, setLogoSize] = useState("14vw")
+  const { user } = useContext(AuthContext);
+  const [signedIn, setSignedIn] = useState(true);
+  const [logoSize, setLogoSize] = useState("14vw");
 
   const handleDahsboardButtonClick = () => {
-    if (!user) return setSignedIn(false)
-    navigate("/")
-  }
+    if (!user) return setSignedIn(false);
+    navigate("/");
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     const screenWidth = window.innerWidth;
-    if(screenWidth > 1200){
-      setLogoSize("12vw")
-    }else if (800 < screenWidth < 1199){
-      setLogoSize("20vw")
-    }else{
-      setLogoSize("18vw")
+    if (screenWidth > 1200) {
+      setLogoSize("12vw");
+    } else if (800 < screenWidth < 1199) {
+      setLogoSize("20vw");
+    } else {
+      setLogoSize("18vw");
     }
-  },[])
+  }, []);
 
   return (
     <Container
@@ -41,9 +39,17 @@ function EntryScreen(props) {
       style={{ paddingLeft: 0, paddingRight: 0 }}
       className={styles.mainContainer}
     >
-      <AppBanner visible={!signedIn} text="You must sign in before you can access the dashboard" primaryColor={"red"} secondaryColor={"white"}/>
-      <div className={styles.logoContainer}>
-        <NeonLogo backgroundColor={"black"} fontSize={logoSize}/>
+      <AppBanner
+        visible={!signedIn}
+        text="You must sign in before you can access the dashboard"
+        primaryColor={"red"}
+        secondaryColor={"white"}
+      />
+      <div className={styles.title}>
+        <span className={styles.marble}>S</span>
+        <div className={styles.logoContainer}>
+          <NeonLogo backgroundColor={"black"} fontSize={logoSize} />
+        </div>
       </div>
       <div className={styles.buttonContainer}>
         <div className={styles.button}>
@@ -67,7 +73,7 @@ function EntryScreen(props) {
           onClick={() => navigate("/admin/login")}
         />
       </div>
-     
+      {/* <span className={styles.glow}></span> */}
     </Container>
   );
 }

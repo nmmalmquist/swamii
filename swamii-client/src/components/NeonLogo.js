@@ -2,9 +2,9 @@ import React from "react";
 
 import styles from "../css/cssComponents/neon-logo.module.css";
 
-function NeonLogo({backgroundColor, fontSize}) {
+function NeonLogo({backgroundColor, fontSize, onClick, ...other}) {
   return (
-      <div className={styles.wrapper}>
+      <div  onClick={onClick} {...other}  className={styles.wrapper} >
         <span style={{fontSize: fontSize}} className={styles.text}>Swamii</span>
         <span className={styles.gradient}></span>
         <span className={styles.dodge}></span>

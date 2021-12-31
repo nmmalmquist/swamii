@@ -12,6 +12,7 @@ import { validateAdmin } from "../api/auth";
 import AppErrorMessage from "../components/form/FormErrorMessage";
 import useAuth from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import NeonLogo from "../components/NeonLogo";
 
 const yupValidationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -20,7 +21,7 @@ const yupValidationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const [validCredentials, setValidCredentials] = useState(true);
-  const {adminLogin} = useAuth();
+  const { adminLogin } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async ({ username, password }) => {
@@ -31,22 +32,37 @@ function LoginScreen(props) {
         password: password,
       });
       //stores token in localStorage
-      adminLogin(token)
+      adminLogin(token);
 
-      setValidCredentials(true)
+      setValidCredentials(true);
       //go to home page
-      navigate("/admin/home")
+      navigate("/admin/home");
     } catch (error) {
-        console.log(error);
-        setValidCredentials(false)
+      console.log(error);
+      setValidCredentials(false);
     }
   };
   return (
     <>
-      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="logo"  onClick={()=>navigate("/entry")} />
+      <Container
+        fluid
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        className={styles.logoContainer}
+      >
+        <div className={styles.logo}>
+          <NeonLogo
+            backgroundColor={"black"}
+            fontSize={45}
+            onClick={() => navigate("/entry")}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
       </Container>
-      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.mainContainer}>
+      <Container
+        fluid
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        className={styles.mainContainer}
+      >
         <div className={styles.contentContainerBackground}>
           <div className={styles.contentContainer}>
             <h2>Admin Log In</h2>
@@ -71,7 +87,10 @@ function LoginScreen(props) {
                   name="password"
                 />
               </div>
-              <AppErrorMessage error="The password or username is incorrect" visible={!validCredentials}/>
+              <AppErrorMessage
+                error="The password or username is incorrect"
+                visible={!validCredentials}
+              />
               <SubmitFormButton
                 title="Admin Log in"
                 extraStyle={styles.submitButton}

@@ -12,6 +12,7 @@ import { validateUser } from "../api/auth";
 import AppErrorMessage from "../components/form/FormErrorMessage";
 import useAuth from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import NeonLogo from "../components/NeonLogo";
 
 const yupValidationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -20,7 +21,7 @@ const yupValidationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const [validCredentials, setValidCredentials] = useState(true);
-  const {userLogin} = useAuth();
+  const { userLogin } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async ({ username, password }) => {
@@ -31,22 +32,33 @@ function LoginScreen(props) {
         password: password,
       });
       //stores token in localStorage
-      userLogin(token)
+      userLogin(token);
 
-      setValidCredentials(true)
+      setValidCredentials(true);
       //go to home page
-      navigate("/")
+      navigate("/");
     } catch (error) {
-        console.log(error);
-        setValidCredentials(false)
+      console.log(error);
+      setValidCredentials(false);
     }
   };
   return (
     <>
-      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="logo" onClick={()=>navigate("/entry")} />
-      </Container>
-      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.mainContainer}>
+      <div className={styles.logoContainer}>
+        <div className={styles.logo}>
+          <NeonLogo
+            backgroundColor={"black"}
+            fontSize={45}
+            onClick={() => navigate("/entry")}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+      </div>
+      <Container
+        fluid
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        className={styles.mainContainer}
+      >
         <div className={styles.contentContainerBackground}>
           <div className={styles.contentContainer}>
             <h2>Log in to your account</h2>
@@ -54,7 +66,6 @@ function LoginScreen(props) {
               initialValues={{ username: "", password: "" }}
               onSubmit={handleSubmit}
               validationSchema={yupValidationSchema}
-              
             >
               <div className={styles.textInputContainer}>
                 <FormTextInput
@@ -72,7 +83,10 @@ function LoginScreen(props) {
                   name="password"
                 />
               </div>
-              <AppErrorMessage error="The password or username is incorrect" visible={!validCredentials}/>
+              <AppErrorMessage
+                error="The password or username is incorrect"
+                visible={!validCredentials}
+              />
               <SubmitFormButton
                 title="Log in"
                 extraStyle={styles.submitButton}

@@ -23,7 +23,7 @@ function MyNavbar(props) {
     <Navbar variant="dark" expand="md" style={{ padding: 0 }}>
       <Container className={styles.container}>
         <div className={styles.logo}>
-          <NeonLogo backgroundColor="black" fontSize={45} />
+          <NeonLogo backgroundColor="black" fontSize={45}  style={{cursor: "pointer"}} onClick={()=>navigate("/entry")}/>
         </div>
         <div className={styles.leftLinksGroup}>
           <Navbar.Collapse id="basic-navbar-nav">

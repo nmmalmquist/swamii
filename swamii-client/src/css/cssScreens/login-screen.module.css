@@ -5,26 +5,27 @@
     flex-direction: column;
     align-items: center;
     padding-top: 3%;
+    z-index: 2;
 }
 .contentContainerBackground{
     background-color: white;
     width: 100%;
     max-width: 500px;
     border-radius: 5px;
+    z-index: 900;
 }
 .contentContainer{
     padding:30px;
 }
 .logoContainer{
     background-color: black;
-    width: 100%;
+    display: block;
+    overflow: hidden;
+    
 }
 .logo{
-    width: 100px;
-    margin: 15px;
-    position: relative;
-    align-self: flex-start;
-    cursor: pointer;
+   overflow:hidden;
+   display: inline-flex;
 }
 .textInputContainer{
     padding: 10px 0;

@@ -12,6 +12,7 @@ import AppErrorMessage from "../components/form/FormErrorMessage";
 import useAuth from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
 import AppBanner from "../components/generic/AppBanner";
+import NeonLogo from "../components/NeonLogo";
 
 const yupValidationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -54,8 +55,7 @@ function CreateAccountScreen(props) {
       //make created account banner visible
       setBannerIsVisible(true);
       //after 2 seconds, return to main entry page
-      setTimeout(()=>navigate("/entry"), 2000)
-
+      setTimeout(() => navigate("/entry"), 2000);
     } catch (error) {
       console.log(error);
       setErrorMessage(error);
@@ -69,15 +69,25 @@ function CreateAccountScreen(props) {
         secondaryColor="white"
         text="New Account Created!"
       />
-      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.logoContainer}>
-        <img
-          className={styles.logo}
-          src={logo}
-          alt="logo"
-          onClick={() => navigate("/entry")}
-        />
+      <Container
+        fluid
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        className={styles.logoContainer}
+      >
+        <div className={styles.logo}>
+          <NeonLogo
+            backgroundColor={"black"}
+            fontSize={45}
+            onClick={() => navigate("/entry")}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
       </Container>
-      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className={styles.mainContainer}>
+      <Container
+        fluid
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        className={styles.mainContainer}
+      >
         <div className={styles.contentContainerBackground}>
           <div className={styles.contentContainer}>
             <h2>Create a Swamii Account</h2>

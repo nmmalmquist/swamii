@@ -36,6 +36,7 @@
     position: absolute;
     mix-blend-mode: color-dodge;
     animation: dodge-area 3s linear infinite;
+    
 }
 @keyframes dodge-area{
     to{
