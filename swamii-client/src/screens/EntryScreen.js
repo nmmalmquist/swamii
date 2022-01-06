@@ -46,7 +46,6 @@ function EntryScreen(props) {
         secondaryColor={"white"}
       />
       <div className={styles.title}>
-        <span className={styles.marble}>S</span>
         <div className={styles.logoContainer}>
           <NeonLogo backgroundColor={"black"} fontSize={logoSize} />
         </div>
@@ -74,6 +73,7 @@ function EntryScreen(props) {
         />
       </div>
       {/* <span className={styles.glow}></span> */}
+      <span className={styles.marble}></span>
     </Container>
   );
 }

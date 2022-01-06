@@ -28,6 +28,7 @@
     flex-direction: column;
     flex: 1;
     margin-top: 1.5rem;
+    overflow: hidden;
 }
 .contentContainer{
     display: flex;

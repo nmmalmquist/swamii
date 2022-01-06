@@ -7,6 +7,8 @@ import { getUserFromToken, getAdminFromToken } from "./auth/storage";
 import AppNavigation from "./navigation/AppNavigation";
 import loadingAnimation from "./assets/animations/loadingSquare.json";
 import NeonLogo from "./components/NeonLogo";
+import ChatBox from "./components/ChatBox";
+import ChatBubble from "./components/ChatBubble";
 
 function App() {
   const [user, setUser] = useState();
@@ -56,6 +58,9 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ user, admin, setUser, setAdmin }}>
+      {/* <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems:"center", backgroundColor: "gray", height: "100vh", width: "700px"}}>
+      <ChatBox/>
+      </div> */}
       <BrowserRouter>
         <AppNavigation />
       </BrowserRouter>

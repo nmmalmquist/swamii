@@ -2,12 +2,13 @@ body{
     margin: 0px
 }
 .mainContainer{
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: black; 
     overflow: hidden;
+    position: relative;    
 }
 .logoContainer{
     display: inline;
@@ -39,7 +40,7 @@ body{
 .glow{
     width: 120%;
     height: 100vh;
-    z-index: 1;
+    z-index: -1;
     position: absolute;
     box-shadow:
    inset 0 0 140px 10px #0ff, /* outer cyan */
@@ -47,16 +48,17 @@ body{
    inset 0 0 60px 20px black;  /* inner white */
 }
 .marble{
-    width: 40vw;
-    height: 40vw;
-    z-index: 999;
+    width: 120%;
+    height: 150%;
+    position: absolute;
     border-radius: 50%;
+    background-color: black;
     box-shadow:
-      inset 0 0 50px #fff,      /* inner white */
-      inset 20px 0 80px #f0f,   /* inner left magenta short */
-      inset -20px 0 80px #0ff,  /* inner right cyan short */
-      inset 20px 0 300px #f0f,  /* inner left magenta broad */
-      inset -20px 0 300px #0ff, /* inner right cyan broad */
+      inset 0 0 10px black,      /* inner white */
+      inset 10px 0 20px #f0f,   /* inner left magenta short */
+      inset -20px 0 30px #0ff,  /* inner right cyan short */
+      inset 20px 0 30px #f0f,  /* inner left magenta broad */
+      inset -20px 0 30px #0ff, /*inner right cyan broad
       0 0 50px #fff,            /* outer white */
       -10px 0 80px #f0f,        /* outer left magenta */
       10px 0 80px #0ff;         /* outer right cyan */
@@ -67,5 +69,6 @@ body{
     flex-direction: column;
     padding: 50px  200px 0;
     align-items: center;
+    z-index: 1;
 
 }

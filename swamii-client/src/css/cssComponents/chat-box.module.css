@@ -1,0 +1,15 @@
+.mainContainer{
+    height: 300px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: solid 1px black;
+
+}
+.mainContainer::-webkit-scrollbar{
+    width: 5px}
+.mainContainer::-webkit-scrollbar-thumb{
+    background-color: cyan;
+    border-radius: 20px;
+}
+

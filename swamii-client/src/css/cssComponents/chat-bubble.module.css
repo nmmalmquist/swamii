@@ -1,0 +1,28 @@
+.sender{
+    color: white;
+    border-radius: 5px;
+    max-width: 200px;
+    background-color: green;
+    border: solid 1px black;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.receiver{
+    color: white;
+    border-radius: 5px;
+    max-width: 200px;
+    background-color: rgb(46, 46, 184);
+    border: solid 1px black;
+    margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.username{
+    font-size: .8rem;
+    color: white;
+    margin-left: 30px;
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+}
