@@ -3,12 +3,12 @@ import { Container } from "react-bootstrap";
 
 import styles from "../css/cssComponents/chat-box.module.css";
 import ChatBubble from "./ChatBubble";
+import AppTextInput from "./generic/AppTextInput";
 
 const currentUser = "nmmalmquist";
 
 function ChatBox(props) {
   const [messages, setMessages] = useState([
-    
     {
       username: "nmmalmquist",
       id: 1,
@@ -105,30 +105,35 @@ function ChatBox(props) {
       dateTimeSent: "02/22/2022 12:00pm",
       message: "Hello, Nick",
     },
-
   ]);
   return (
-    <Container className={styles.mainContainer}>
-      {messages.map((message) => {
-        if (message.username === currentUser) {
-          return (
-            <ChatBubble
-              variant="sender"
-              text={message.message}
-              username={message.username}
-            />
-          );
-        } else {
-          return (
-            <ChatBubble
-              variant="receiver"
-              text={message.message}
-              username={message.username}
-            />
-          );
-        }
-      })}
-    </Container>
+    <div className={styles.all}>
+      <Container className={styles.mainContainer}>
+        {messages.map((message) => {
+          if (message.username === currentUser) {
+            return (
+              <ChatBubble
+                variant="sender"
+                text={message.message}
+                username={message.username}
+              />
+            );
+          } else {
+            return (
+              <ChatBubble
+                variant="receiver"
+                text={message.message}
+                username={message.username}
+              />
+            );
+          }
+        })}
+      </Container>
+      <div className={styles.textInput}>
+        <AppTextInput placeholder="message"></AppTextInput>
+        <div className={styles.send}>Send</div>
+      </div>
+    </div>
   );
 }
 
