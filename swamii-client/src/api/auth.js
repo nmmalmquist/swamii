@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_DOMAIN = "http://10.0.0.114:5000";
+const BASE_DOMAIN = "http://10.122.137.60:5000";
 
 const validateUser = async ({ username, password }) => {
   const url = `${BASE_DOMAIN}/api/auth/user/login`;

@@ -18,7 +18,7 @@
     align-items: center;
     flex: 1;
 }
-.send{
+/* .send{
     font-size: 12px;
     background-color: rgb(0, 102, 128);
     color: white;
@@ -29,11 +29,22 @@
     align-items: center;
     display: flex;
     cursor: pointer;
-}
+} */
 .all{
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+}
+.buttonContainer{
+    width: 50px;
+    height: 20px;
+    margin: 37px 5px 30px;
+    display: flex;
+    font-size: 12px;
+    overflow: hidden;
+}
+.messageBar{
+    width: 100%;
 }
 

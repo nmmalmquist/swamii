@@ -55,7 +55,6 @@ function App() {
       </div>
     );
   }
-
   return (
     <AuthContext.Provider value={{ user, admin, setUser, setAdmin }}>
       {/* <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems:"center", backgroundColor: "gray", height: "100vh", width: "700px"}}>

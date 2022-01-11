@@ -30,6 +30,7 @@
     background-color: black !important;
     color: white !important;
     transition: .5s;
+    height: 40px;
 }
 .submitButton:hover{
     transform: scale(1.05);
