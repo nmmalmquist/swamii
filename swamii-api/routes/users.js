@@ -19,7 +19,7 @@ router.get("/active", async function (req, res) {
   const userList = await User.find({ deleted: false });
   res.send(userList);
 });
-//Get All active Users
+//Get All active Users sorted by balance
 router.get("/active/ordered-by-balance", async function (req, res) {
   const userList = await User.find({ deleted: false }).sort({currentBalance: "desc"});
   res.send(userList);

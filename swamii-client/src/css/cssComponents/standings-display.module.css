@@ -7,3 +7,6 @@
     justify-content: center;
     flex: 1;
 }
+.mainContainer{
+height: calc(100vh / 3);
+}

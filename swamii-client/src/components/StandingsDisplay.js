@@ -25,7 +25,7 @@ function StandingsDisplay({ users }) {
     return <div>{item}</div>;
   };
 
-  return <div>{users.map((item, index) => handleMaping(item, index))}</div>;
+  return <div className={styles.mainContainer}>{users.map((item, index) => handleMaping(item, index))}</div>;
 }
 
 export default StandingsDisplay;

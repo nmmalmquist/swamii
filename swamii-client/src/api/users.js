@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_DOMAIN = "http://10.122.137.60:5000"
+const BASE_DOMAIN = "http://10.225.146.61:5000"
 
 const getAllUsers = async () => {
   //must use IP Address, not localhost

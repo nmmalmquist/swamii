@@ -1,116 +1,116 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Container } from "react-bootstrap";
+import socketIOClient from "socket.io-client";
 
 import styles from "../css/cssComponents/chat-box.module.css";
 import ChatBubble from "./ChatBubble";
-import AppTextInput from "./generic/AppTextInput";
 import AppForm from "./form/AppForm";
 import SubmitFormButton from "./form/SubmitFormButton";
 import FormTextInput from "./form/FormTextInput";
 import AuthContext from "../auth/context";
 
-
 function ChatBox(props) {
-  let currentUser = useContext(AuthContext).user.username
-  console.log(currentUser)
-  const [messages, setMessages] = useState([
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "user",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-    {
-      username: "jmalm",
-      id: 1,
-      dateTimeSent: "02/22/2022 12:00pm",
-      message: "Hello, Nick",
-    },
-  ]);
+  let currentUser = useContext(AuthContext).user;
+  console.log("this user : " + JSON.stringify(currentUser))
+  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "user",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  //   {
+  //     username: "jmalm",
+  //     userId: 1,
+  //     dateTimeSent: "02/22/2022 12:00pm",
+  //     text: "Hello, Nick",
+  //   },
+  // ]);
 
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef();
@@ -119,28 +119,45 @@ function ChatBox(props) {
   };
 
   const handleSubmit = (newMessage) => {
-    if (newMessage.message === "") return;
-    console.log("new message: " + newMessage.message);
-    setMessages([...messages, newMessage]);
+    if (newMessage.text === "") return;
+    console.log("new message: " + newMessage.text);
+
+    //establish connection
+    const socket = socketIOClient("10.225.146.61:5556");
+    socket.emit("message", newMessage);
   };
+
+
+  useEffect(() => {
+    //establish connection
+    const socket = socketIOClient("10.225.146.61:5556");
+    //event handler for messages
+    socket.on("message", (data) => {
+      setMessages(data);
+    });
+    //initializes the first call to grab data from DB, by making the message "", it will not be added to DB
+    socket.emit("message", "");
+  }, []);
 
   return (
     <div id="scrollBox" className={styles.all}>
       <Container className={styles.mainContainer}>
         {messages.map((message) => {
-          if (message.username === currentUser) {
+          if (message.username === currentUser.username) {
             return (
               <ChatBubble
+                key={message._id}
                 variant="sender"
-                text={message.message}
+                text={message.text}
                 username={message.username}
               />
             );
           } else {
             return (
               <ChatBubble
+                key={message._id}
                 variant="receiver"
-                text={message.message}
+                text={message.text}
                 username={message.username}
               />
             );
@@ -151,15 +168,14 @@ function ChatBox(props) {
       <div className={styles.textInput}>
         <AppForm
           initialValues={{
-            message: "",
-            username: currentUser,
-            dateTimeSent: Date.now(),
-            id: 1,
+            text: "",
+            username: currentUser.username,
+            userId:  currentUser._id,
           }}
           onSubmit={handleSubmit}
         >
           <div className={styles.messageBar}>
-            <FormTextInput placeholder="message" type="text" name="message" />
+            <FormTextInput placeholder="message" type="text" name="text" />
           </div>
           <div className={styles.buttonContainer}>
             <SubmitFormButton title="Send" />

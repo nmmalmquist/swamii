@@ -1,5 +1,5 @@
 .mainContainer{
-    height: 300px;
+    height: calc(100vh / 3);
     scroll-behavior: smooth;
     overflow-x: hidden;
     overflow-y: auto;

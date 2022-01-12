@@ -24,6 +24,7 @@ app.use("/api/users",  require('./routes/users'));
 app.use("/api/admins",  require('./routes/admins'));
 app.use("/api/auth",  require('./routes/auth'));
 
+
 // Global error handling
 app.use(function (err, _req, res) {
   console.error(err.stack);
