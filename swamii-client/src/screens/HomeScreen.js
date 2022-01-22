@@ -6,6 +6,8 @@ import StandingsDisplay from "../components/StandingsDisplay";
 import { getAllUsersOrderedByBalance } from "../api/users";
 import MyNavbar from "../components/MyNavbar";
 import ChatBox from "../components/ChatBox";
+import GamesList from "../components/GamesList";
+
 
 function HomeScreen(props) {
   const [users, setUsers] = useState(null);
@@ -17,42 +19,43 @@ function HomeScreen(props) {
   };
   useEffect(() => {
     getData();
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, []);
   return (
     <>
-    <MyNavbar/>
-    <Container
-      fluid
-      style={{ paddingLeft: 0, paddingRight: 0 }}
-      className={styles.screen}
-    >
-      <Row className={styles.thisRow}>
-        <Col xs={12} md={6}>
-          <div
-            className={`${styles.contentContainer} ${styles.paddingContainer}`}
-          >
-            <div className={styles.container1}>
-              <div className={styles.border}>This weeks games</div>
+      <MyNavbar />
+      <Container
+        fluid
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        className={styles.screen}
+      >
+        <Row className={styles.thisRow}>
+          <Col xs={12} md={6}>
+            <div
+              className={`${styles.contentContainer} ${styles.paddingContainer}`}
+            >
+              <div className={styles.container1}>
+                <div className={styles.border}>This weeks games</div>
+                <GamesList  />
+              </div>
             </div>
-          </div>
-        </Col>
-        <Col xs={12} md={6}>
-          <div
-            className={`${styles.contentContainer} ${styles.paddingContainer}`}
-          >
-            <div className={styles.container2}>
-              <div className={styles.border}>Standings</div>
-              <StandingsDisplay users={users} />
+          </Col>
+          <Col xs={12} md={6}>
+            <div
+              className={`${styles.contentContainer} ${styles.paddingContainer}`}
+            >
+              <div className={styles.container2}>
+                <div className={styles.border}>Standings</div>
+                <StandingsDisplay users={users} />
+              </div>
+              <div className={styles.container3}>
+                <div className={styles.border}>Chat box</div>
+                <ChatBox />
+              </div>
             </div>
-            <div className={styles.container3}>
-              <div className={styles.border}>Chat box</div>
-              <ChatBox/>
-            </div>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

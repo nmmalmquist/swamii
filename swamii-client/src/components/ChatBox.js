@@ -11,7 +11,7 @@ import AuthContext from "../auth/context";
 
 function ChatBox(props) {
   let currentUser = useContext(AuthContext).user;
-  console.log("this user : " + JSON.stringify(currentUser))
+  // console.log("this user : " + JSON.stringify(currentUser));
   const [messages, setMessages] = useState([]);
   // const [messages, setMessages] = useState([
   //   {
@@ -118,15 +118,16 @@ function ChatBox(props) {
     return <div ref={elementRef} />;
   };
 
-  const handleSubmit = (newMessage) => {
+  const handleSubmit = (newMessage, { resetForm }) => {
     if (newMessage.text === "") return;
-    console.log("new message: " + newMessage.text);
 
     //establish connection
     const socket = socketIOClient("10.225.146.61:5556");
     socket.emit("message", newMessage);
-  };
 
+    //reset form/message bar
+    resetForm({ values: "" });
+  };
 
   useEffect(() => {
     //establish connection
@@ -170,7 +171,7 @@ function ChatBox(props) {
           initialValues={{
             text: "",
             username: currentUser.username,
-            userId:  currentUser._id,
+            userId: currentUser._id,
           }}
           onSubmit={handleSubmit}
         >

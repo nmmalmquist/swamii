@@ -31,7 +31,7 @@ app.use(function (err, _req, res) {
 socketIO.on("connection", (socket) => {
   console.log("a user is connected");
   socket.on("message", async (message) => {
-    console.log("new data: "+ JSON.stringify(message));
+    // console.log("new data: "+ JSON.stringify(message));
     //first save new message if there is one
     if (message || message != "") {
       await chatDB.saveMessage(message);
