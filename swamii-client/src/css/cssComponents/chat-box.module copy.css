@@ -4,7 +4,6 @@
     overflow-x: hidden;
     overflow-y: auto;
     border: solid 1px black;
-    color: black;
 
 }
 .mainContainer::-webkit-scrollbar{

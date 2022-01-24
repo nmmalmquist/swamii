@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
+
+import AuthContext from '../auth/context';
 
 function GamesList({dataFunction}) {
+
     return (
         <div>
-            {dataFunction}
+            holding spot
         </div>
     );
 }

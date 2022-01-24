@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 import styles from "../css/cssScreens/login-screen.module.css";
 
@@ -11,7 +12,6 @@ import SubmitFormButton from "../components/form/SubmitFormButton";
 import { validateUser } from "../api/auth";
 import AppErrorMessage from "../components/form/FormErrorMessage";
 import useAuth from "../auth/useAuth";
-import { useNavigate } from "react-router-dom";
 import NeonLogo from "../components/NeonLogo";
 
 const yupValidationSchema = Yup.object().shape({

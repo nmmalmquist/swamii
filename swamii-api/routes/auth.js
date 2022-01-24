@@ -62,13 +62,14 @@ router.post("/user/register", async (req, res) => {
 ////////////////////////////////////////
 
 router.post("/user/login", async (req, res) => {
-  console.log(req.body.username)
+  
   //Check Validation before adding user
   const { error } = loginValidation(req.body);
   if (error) return res.send({errorState: 1, message: error.details[0].message})
 
   //Check if user username exists
   const user = await User.findOne({ username: req.body.username.toLowerCase() });
+  console.log(user)
   if (!user) return res.send({errorState: 0, message: "Username is invalid"});
 
   //Check if password is correct
@@ -78,7 +79,7 @@ router.post("/user/login", async (req, res) => {
     return res.send({errorState: 0, message: "Password is invalid"});
 
   //If all validation checks out, then Create web token and send to front-end
-  const token = jwt.sign({ _id: user._id, username: user.username }, process.env.TOKEN_SECRET);
+  const token = jwt.sign({ _id: user._id, username: user.username, avatarURL: user.avatarURL }, process.env.TOKEN_SECRET);
   res.header("auth-token", token).send(token);
 });
 

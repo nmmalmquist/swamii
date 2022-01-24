@@ -9,4 +9,5 @@
 }
 .mainContainer{
 height: calc(100vh / 3);
+overflow-y: auto;
 }

@@ -5,8 +5,9 @@ import styles from "../css/cssScreens/home-screen.module.css";
 import StandingsDisplay from "../components/StandingsDisplay";
 import { getAllUsersOrderedByBalance } from "../api/users";
 import MyNavbar from "../components/MyNavbar";
-import ChatBox from "../components/ChatBox";
+import MyChatItemList from "../components/MyChatItemList";
 import GamesList from "../components/GamesList";
+import ChatContainer from "../components/ChatContainer";
 
 
 function HomeScreen(props) {
@@ -50,7 +51,7 @@ function HomeScreen(props) {
               </div>
               <div className={styles.container3}>
                 <div className={styles.border}>Chat box</div>
-                <ChatBox />
+                <ChatContainer/>
               </div>
             </div>
           </Col>

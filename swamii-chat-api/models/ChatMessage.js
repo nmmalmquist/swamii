@@ -7,11 +7,15 @@ const chatMessageSchema = new mongoose.Schema({
         required: true,
         min: 1
     }, 
-    username: {
+    sender: {
         type: String,
         required: true,
     },
-    userId: {
+    recipient: {
+        type: String,
+        required: true,
+    },
+    senderId: {
         type: String,
         required: true,
     },

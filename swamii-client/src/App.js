@@ -7,7 +7,6 @@ import { getUserFromToken, getAdminFromToken } from "./auth/storage";
 import AppNavigation from "./navigation/AppNavigation";
 import loadingAnimation from "./assets/animations/loadingSquare.json";
 import NeonLogo from "./components/NeonLogo";
-import ChatBox from "./components/ChatBox";
 import ChatBubble from "./components/ChatBubble";
 
 function App() {

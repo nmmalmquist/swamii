@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    avatarURL: {
+        type: String,
+        required: true,
+    },
     dateCreated: {
         type: Date,
         default: Date.now
@@ -39,6 +43,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    
     deleted: {
         type: Boolean,
         default: false
