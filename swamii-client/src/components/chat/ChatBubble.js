@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-import styles from "../css/cssComponents/chat-bubble.module.css";
+import styles from "../../css/cssComponents/chat-bubble.module.css";
 
 function ChatBubble({ text, variant = "receiver", username }) {
   if (variant === "receiver") {

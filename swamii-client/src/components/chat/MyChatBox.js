@@ -2,13 +2,13 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { Container } from "react-bootstrap";
 import socketIOClient from "socket.io-client";
 
-import styles from "../css/cssComponents/chat-box.module.css";
-import ChatBubble from "./ChatBubble";
-import AppForm from "./form/AppForm";
-import SubmitFormButton from "./form/SubmitFormButton";
-import FormTextInput from "./form/FormTextInput";
-import AuthContext from "../auth/context";
-import ChatContext from "../chat/context";
+import styles from "../../css/cssComponents/chat-box.module.css";
+import ChatBubble from "../chat/ChatBubble";
+import AppForm from "../form/AppForm";
+import SubmitFormButton from "../form/SubmitFormButton";
+import FormTextInput from "../form/FormTextInput";
+import AuthContext from "../../auth/context";
+import ChatContext from "../../chat/context";
 
 function MyChatBox({ chatItemClicked }) {
   let currentUser = useContext(AuthContext).user;
@@ -22,24 +22,23 @@ function MyChatBox({ chatItemClicked }) {
   };
 
   const compareTo = (firstEl, secondEl) => {
-    if(firstEl.dateTimeCreated < secondEl.dateTimeCreated){
-      return -1
-    } else if(firstEl.dateTimeCreated > secondEl.dateTimeCreated){
-      return 1
-    } else{
-      return 0
+    if (firstEl.dateTimeCreated < secondEl.dateTimeCreated) {
+      return -1;
+    } else if (firstEl.dateTimeCreated > secondEl.dateTimeCreated) {
+      return 1;
+    } else {
+      return 0;
     }
-  }
+  };
 
   const handleSubmit = (newMessage, { resetForm }) => {
-    
     if (newMessage.text === "") return;
-    socket.emit("message", {message: newMessage, user: currentUser});
+    socket.emit("message", { message: newMessage, user: currentUser });
     //reset form/message bar
     resetForm({ values: "" });
 
     //append the messages with a new message, to avoid pinging db again
-    setMessages([...messages, newMessage])
+    setMessages([...messages, newMessage]);
   };
 
   useEffect(() => {
@@ -49,6 +48,11 @@ function MyChatBox({ chatItemClicked }) {
     });
     //initializes the first call to grab data from DB, by making the message "", it will not be added to DB
     socket.emit("partyGroupMessage", chatItemClicked);
+
+    //on de-mounting
+    return () => {
+      setMessages([]);
+    };
   }, [socket, currentUser, chatItemClicked]);
 
   return (
@@ -85,7 +89,7 @@ function MyChatBox({ chatItemClicked }) {
             senderId: currentUser._id,
             recipient: chatItemClicked.title,
             //this is a temporary unique ID for all new messages that get added in a session before the db can create the GUID
-            _id: ((new Date()).toString() + Math.random() * 1000) 
+            _id: new Date().toString() + Math.random() * 1000,
           }}
           onSubmit={handleSubmit}
         >

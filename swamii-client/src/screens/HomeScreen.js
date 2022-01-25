@@ -5,9 +5,8 @@ import styles from "../css/cssScreens/home-screen.module.css";
 import StandingsDisplay from "../components/StandingsDisplay";
 import { getAllUsersOrderedByBalance } from "../api/users";
 import MyNavbar from "../components/MyNavbar";
-import MyChatItemList from "../components/MyChatItemList";
 import GamesList from "../components/GamesList";
-import ChatContainer from "../components/ChatContainer";
+import ChatContainer from "../components/chat/ChatContainer";
 
 
 function HomeScreen(props) {
