@@ -2,7 +2,6 @@ const express = require("express");
 const User = require("../models/User");
 const Admin = require("../models/Admin");
 const { registerValidation, loginValidation } = require("../validation");
-const argon = require("argon2");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -47,7 +46,6 @@ router.post("/user/register", async (req, res) => {
     console.log("Could not hash password : " + error);
   }
 
-  
   if (hashPassword == req.body.password)
     return res.send({
       errorState: 4,
@@ -95,7 +93,6 @@ router.post("/user/login", async (req, res) => {
 
   //Check if password is correct
   const validPassword = bcrypt.compareSync(req.body.password, user.password);
- 
 
   if (!validPassword)
     return res.send({ errorState: 0, message: "Password is invalid" });
@@ -135,9 +132,10 @@ router.post("/admin/register", async (req, res) => {
     });
 
   //Hash password
-  let hashPassword = req.body.pasword;
+  let hashPassword = req.body.password;
   try {
-    hashPassword = await argon.hash(req.body.password);
+    const hash = bcrypt.hashSync(req.body.password, 10);
+    hashPassword = hash;
   } catch (error) {
     console.log("Could not hash password : " + error);
   }
@@ -180,7 +178,7 @@ router.post("/admin/login", async (req, res) => {
   if (!admin) return res.status(400).send("Username or Password is not valid");
 
   //Check if password is correct
-  const validPassword = await argon.verify(admin.password, req.body.password);
+  const validPassword = bcrypt.compareSync(req.body.password, user.password);
   if (!validPassword)
     return res.status(400).send("Email or Password is invalid");
 
