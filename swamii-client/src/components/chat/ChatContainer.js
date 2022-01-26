@@ -6,9 +6,10 @@ import MyChatBox from "../chat/MyChatBox";
 import MyChatListItem from "../chat/MyChatItemList";
 import ChatHeader from "./ChatHeader";
 import { getAllUsers } from "../../api/users";
+import ipAddress from "../../config";
 
 function ChatContainer(props) {
-  const BASE_URL = "10.122.184.173:5000:5556";
+  const BASE_DOMAIN = `http://${ipAddress}:5556`;
   const [chatListVisible, setChatListVisible] = useState(true);
   const [socket, setSocket] = useState(null);
   const [chatItemClicked, setChatItemClicked] = useState(null);
@@ -28,9 +29,9 @@ function ChatContainer(props) {
   }
 
   useEffect(() => {
-    setSocket(socketIOClient(BASE_URL));
+    setSocket(socketIOClient(BASE_DOMAIN));
     loadUsers();
-  }, []);
+  }, [BASE_DOMAIN]);
 
   return (
     <ChatContext.Provider value={{ socket }}>

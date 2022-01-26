@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "../../css/cssComponents/chat-box.module.css";
 
-
 import AuthContext from "../../auth/context";
 
 import ChatContext from "../../chat/context";
@@ -16,9 +15,6 @@ function MyChatListItem({ onListItemClick, allUsers }) {
   let currentUser = useContext(AuthContext).user;
 
   const [chatListData, setChatListData] = useState([]);
-  
-
-  
 
   useEffect(() => {
     //event handler for messages
@@ -33,37 +29,47 @@ function MyChatListItem({ onListItemClick, allUsers }) {
     //   setAllUsers({}); // This worked for me
     //   setChatListData({})
     // };
-  });
-
+  }, [currentUser, socket]);
   return (
     <div id="scrollBox" className={styles.all}>
       <Container className={styles.mainContainer}>
-        {chatListData && allUsers ? chatListData.map((chatItemData) => {
-          return (
-            <ChatList
-              key={chatItemData._id}
-              className="chat-item"
-              dataSource={[
-                {
-                  avatar: allUsers.filter(
-                    (i) => i.username === chatItemData.title
-                  )[0].avatarURL,
-                  alt: "Avatar",
-                  title: chatItemData.title,
-                  subtitle: chatItemData.text,
-                  date: new Date(chatItemData.dateTimeCreated),
-                  unread: 0,
-                  sender: chatItemData.sender,
-                  recipient: chatItemData.recipient,
-  
-                },
-              ]}
-              onClick={(item) => {
-                onListItemClick(item);
-              }}
-            />
-          );
-        }) : null}
+        {chatListData && allUsers
+          ? chatListData.map((chatItemData) => {
+
+            //this section checks to see if there is an user for the correspoding list item. if not, then 
+              let thisAvatarURL = "";
+              const titleUser = allUsers.filter(
+                (i) => i.username === chatItemData.title
+              )[0];
+              if(!titleUser)
+              {
+                return null;
+              }
+              thisAvatarURL = titleUser.avatarURL
+
+              return (
+                <ChatList
+                  key={chatItemData._id}
+                  className="chat-item"
+                  dataSource={[
+                    {
+                      avatar: thisAvatarURL,
+                      alt: "Avatar",
+                      title: chatItemData.title,
+                      subtitle: chatItemData.text,
+                      date: new Date(chatItemData.dateTimeCreated),
+                      unread: 0,
+                      sender: chatItemData.sender,
+                      recipient: chatItemData.recipient,
+                    },
+                  ]}
+                  onClick={(item) => {
+                    onListItemClick(item);
+                  }}
+                />
+              );
+            })
+          : null}
         {/* <AlwaysScrollToBottom /> */}
       </Container>
     </div>
