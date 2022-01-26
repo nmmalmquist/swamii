@@ -8,7 +8,7 @@ import ChatHeader from "./ChatHeader";
 import { getAllUsers } from "../../api/users";
 
 function ChatContainer(props) {
-  const BASE_URL = "10.122.137.60:5556";
+  const BASE_URL = "10.122.184.173:5000:5556";
   const [chatListVisible, setChatListVisible] = useState(true);
   const [socket, setSocket] = useState(null);
   const [chatItemClicked, setChatItemClicked] = useState(null);

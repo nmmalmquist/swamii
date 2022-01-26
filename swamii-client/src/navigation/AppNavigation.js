@@ -8,6 +8,7 @@ import LoginScreen from "../screens/LoginScreen";
 import CreateAccountScreen from "../screens/CreateAccountScreen";
 import AdminLoginScreen from "../screens/AdminLoginScreen";
 import AdminHomeScreen from "../screens/AdminHomeScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 function AppNavigation(props) {
   return (
@@ -18,7 +19,7 @@ function AppNavigation(props) {
       <Route path="/entry" element={<EntryScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<CreateAccountScreen />} />
-
+      <Route path="/profile" element={<ProfileScreen/>} />
       <Route path="/admin/login" element={<AdminLoginScreen />} />
       <Route exact path="/admin/home" element={<PrivateRoute type="admin" />}>
         <Route exact path="/admin/home" element={<AdminHomeScreen />} />

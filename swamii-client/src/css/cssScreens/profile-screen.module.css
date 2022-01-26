@@ -1,0 +1,27 @@
+.appButton{
+    background-color: darkred;
+}
+.buttonStyle{
+    height: 20vh;
+    width: 60vw;
+    background-color: yellow;
+}
+.buttonTwo{
+    height: 10vh;
+    width: 10vw;
+    background-color: purple;
+}
+.buttonThree{
+    height: 10vh;
+    width: 10vw;
+    background-color: brown;
+}
+.parentDiv{
+    width: 100pc;
+    height: 700px;
+    background-color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end; 
+}
