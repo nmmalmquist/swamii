@@ -1,3 +1,3 @@
-const ipAddress = "10.225.146.61"
+const ipAddress = "10.122.184.173"
 
 export default ipAddress;
