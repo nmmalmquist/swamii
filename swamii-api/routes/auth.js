@@ -2,7 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const Admin = require("../models/Admin");
 const { registerValidation, loginValidation } = require("../validation");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // router is an instance of the express router.
