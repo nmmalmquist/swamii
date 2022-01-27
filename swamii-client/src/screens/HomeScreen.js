@@ -49,7 +49,6 @@ function HomeScreen(props) {
                 <StandingsDisplay users={users} />
               </div>
               <div className={styles.container3}>
-                <div className={styles.border}>Chat box</div>
                 <ChatContainer/>
               </div>
             </div>

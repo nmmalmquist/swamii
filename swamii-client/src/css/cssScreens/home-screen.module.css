@@ -23,7 +23,6 @@
 
 }
 .container3{
-    border: 1px solid green;
     display: flex;
     flex-direction: column;
     margin-top: 1.5rem;

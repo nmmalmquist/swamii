@@ -65,32 +65,35 @@ function LoginScreen(props) {
             <AppForm
               initialValues={{ username: "", password: "" }}
               onSubmit={handleSubmit}
+              onEnter={handleSubmit}
               validationSchema={yupValidationSchema}
             >
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Username"
-                  type="text"
-                  label="Username"
-                  name="username"
+              <form>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Username"
+                    type="text"
+                    label="Username"
+                    name="username"
+                  />
+                </div>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Password"
+                    type="password"
+                    label="Password"
+                    name="password"
+                  />
+                </div>
+                <AppErrorMessage
+                  error="The password or username is incorrect"
+                  visible={!validCredentials}
                 />
-              </div>
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Password"
-                  type="password"
-                  label="Password"
-                  name="password"
+                <SubmitFormButton
+                  title="Log in"
+                  extraStyle={styles.submitButton}
                 />
-              </div>
-              <AppErrorMessage
-                error="The password or username is incorrect"
-                visible={!validCredentials}
-              />
-              <SubmitFormButton
-                title="Log in"
-                extraStyle={styles.submitButton}
-              />
+              </form>
             </AppForm>
           </div>
         </div>

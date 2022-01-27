@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 
+import styles from "../../css/cssScreens/chat-container.module.css"
+
 import ChatContext from "../../chat/context";
 import MyChatBox from "../chat/MyChatBox";
 import MyChatListItem from "../chat/MyChatItemList";
@@ -22,11 +24,12 @@ function ChatContainer(props) {
 
   const returnToChatList = () => {
     setChatListVisible(true);
+    setChatItemClicked(null)
   };
 
-  const loadUsers = async() => {
-      setAllUsers(await getAllUsers())
-  }
+  const loadUsers = async () => {
+    setAllUsers(await getAllUsers());
+  };
 
   useEffect(() => {
     setSocket(socketIOClient(BASE_DOMAIN));
@@ -35,18 +38,19 @@ function ChatContainer(props) {
 
   return (
     <ChatContext.Provider value={{ socket }}>
-      <div>
+      <div className={styles.mainContainer}>
+        <ChatHeader
+          chatItemClicked={chatItemClicked}
+          onBackClick={returnToChatList}
+        />
         {chatListVisible && socket && allUsers ? (
-          <MyChatListItem onListItemClick={onListItemClick} allUsers={allUsers} />
+          <MyChatListItem
+            onListItemClick={onListItemClick}
+            allUsers={allUsers}
+          />
         ) : null}
         {!chatListVisible && socket && chatItemClicked ? (
-          <>
-            <ChatHeader
-              chatItemClicked={chatItemClicked}
-              onBackClick={returnToChatList}
-            />
-            <MyChatBox chatItemClicked={chatItemClicked} />
-          </>
+          <MyChatBox chatItemClicked={chatItemClicked} />
         ) : null}
       </div>
     </ChatContext.Provider>

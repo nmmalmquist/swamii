@@ -93,12 +93,14 @@ function MyChatBox({ chatItemClicked }) {
           }}
           onSubmit={handleSubmit}
         >
-          <div className={styles.messageBar}>
-            <FormTextInput placeholder="message" type="text" name="text" />
-          </div>
-          <div className={styles.buttonContainer}>
-            <SubmitFormButton title="Send" />
-          </div>
+          <form className={styles.bottomSection}>
+            <div className={styles.messageBar}>
+              <FormTextInput  placeholder="message" type="text" name="text" />
+            </div>
+            <div className={styles.buttonContainer}>
+              <SubmitFormButton extraStyle={styles.submitButton} title="Send" />
+            </div>
+          </form>
         </AppForm>
       </div>
     </div>

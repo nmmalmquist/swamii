@@ -103,66 +103,68 @@ function CreateAccountScreen(props) {
               onSubmit={handleSubmit}
               validationSchema={yupValidationSchema}
             >
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="First Name"
-                  type="text"
-                  label="First Name"
-                  name="firstName"
+              <form>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="First Name"
+                    type="text"
+                    label="First Name"
+                    name="firstName"
+                  />
+                </div>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Last Name"
+                    type="text"
+                    label="Last Name"
+                    name="lastName"
+                  />
+                </div>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Email"
+                    type="email"
+                    label="Email"
+                    name="email"
+                  />
+                </div>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Username"
+                    type="text"
+                    label="Username"
+                    name="username"
+                  />
+                </div>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Password"
+                    type="password"
+                    label="Password"
+                    name="password"
+                  />
+                </div>
+                <div className={styles.textInputContainer}>
+                  <FormTextInput
+                    placeholder="Password"
+                    type="password"
+                    label="Confirm Password"
+                    name="confirmPassword"
+                  />
+                </div>
+                <AppErrorMessage
+                  error={errorMessage ? JSON.parse(errorMessage).message : null}
+                  visible={errorMessage}
                 />
-              </div>
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Last Name"
-                  type="text"
-                  label="Last Name"
-                  name="lastName"
+                <AppErrorMessage
+                  error="The passwords do not match."
+                  visible={!passwordConfirmed}
                 />
-              </div>
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Email"
-                  type="email"
-                  label="Email"
-                  name="email"
+                <SubmitFormButton
+                  title="Log in"
+                  extraStyle={styles.submitButton}
                 />
-              </div>
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Username"
-                  type="text"
-                  label="Username"
-                  name="username"
-                />
-              </div>
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Password"
-                  type="password"
-                  label="Password"
-                  name="password"
-                />
-              </div>
-              <div className={styles.textInputContainer}>
-                <FormTextInput
-                  placeholder="Password"
-                  type="password"
-                  label="Confirm Password"
-                  name="confirmPassword"
-                />
-              </div>
-              <AppErrorMessage
-                error={errorMessage ? JSON.parse(errorMessage).message : null}
-                visible={errorMessage}
-              />
-              <AppErrorMessage
-                error="The passwords do not match."
-                visible={!passwordConfirmed}
-              />
-              <SubmitFormButton
-                title="Log in"
-                extraStyle={styles.submitButton}
-              />
+              </form>
             </AppForm>
           </div>
         </div>

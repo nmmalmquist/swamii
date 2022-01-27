@@ -178,7 +178,7 @@ router.post("/admin/login", async (req, res) => {
   if (!admin) return res.status(400).send("Username or Password is not valid");
 
   //Check if password is correct
-  const validPassword = bcrypt.compareSync(req.body.password, user.password);
+  const validPassword = bcrypt.compareSync(req.body.password, admin.password);
   if (!validPassword)
     return res.status(400).send("Email or Password is invalid");
 
