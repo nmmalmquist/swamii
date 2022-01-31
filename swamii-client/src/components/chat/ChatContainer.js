@@ -9,10 +9,12 @@ import MyChatListItem from "../chat/MyChatItemList";
 import ChatHeader from "./ChatHeader";
 import { getAllUsers } from "../../api/users";
 import ipAddress from "../../config";
+import NewChat from "./NewChat";
 
 function ChatContainer(props) {
   const BASE_DOMAIN = `http://${ipAddress}:5556`;
   const [chatListVisible, setChatListVisible] = useState(true);
+  const [newChatVisible, setNewChatVisible] = useState(false);
   const [socket, setSocket] = useState(null);
   const [chatItemClicked, setChatItemClicked] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
@@ -22,9 +24,15 @@ function ChatContainer(props) {
     setChatItemClicked(item);
   };
 
+  const goToNewChat = () => {
+    setChatListVisible(false);
+    setNewChatVisible(true)
+  }
+
   const returnToChatList = () => {
     setChatListVisible(true);
     setChatItemClicked(null)
+    setNewChatVisible(false)
   };
 
   const loadUsers = async () => {
@@ -35,13 +43,15 @@ function ChatContainer(props) {
     setSocket(socketIOClient(BASE_DOMAIN));
     loadUsers();
   }, [BASE_DOMAIN]);
-
+ 
   return (
     <ChatContext.Provider value={{ socket }}>
       <div className={styles.mainContainer}>
         <ChatHeader
           chatItemClicked={chatItemClicked}
           onBackClick={returnToChatList}
+          onNewChatClick={goToNewChat}
+          newChatIconVisible={!newChatVisible}
         />
         {chatListVisible && socket && allUsers ? (
           <MyChatListItem
@@ -52,6 +62,7 @@ function ChatContainer(props) {
         {!chatListVisible && socket && chatItemClicked ? (
           <MyChatBox chatItemClicked={chatItemClicked} />
         ) : null}
+        {newChatVisible && socket ? (<NewChat allUsers={allUsers}/>) : null}
       </div>
     </ChatContext.Provider>
   );
