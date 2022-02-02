@@ -88,12 +88,10 @@ router.post("/user/login", async (req, res) => {
   const user = await User.findOne({
     username: req.body.username.toLowerCase(),
   });
-  console.log(user);
   if (!user) return res.send({ errorState: 0, message: "Username is invalid" });
 
   //Check if password is correct
   const validPassword = bcrypt.compareSync(req.body.password, user.password);
-
   if (!validPassword)
     return res.send({ errorState: 0, message: "Password is invalid" });
 
@@ -144,6 +142,7 @@ router.post("/admin/register", async (req, res) => {
       errorState: 4,
       message: "Could not hash password. User Not created",
     });
+
 
   //create new Admin object
   const admin = new Admin({

@@ -37,6 +37,7 @@ function ChatContainer(props) {
 
   const loadUsers = async () => {
     setAllUsers(await getAllUsers());
+    
   };
 
   useEffect(() => {

@@ -1,13 +1,11 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import "react-chat-elements/dist/main.css";
 import { ChatList } from "react-chat-elements";
-import { useNavigate } from "react-router-dom";
 
 import styles from "../../css/cssComponents/chat-box.module.css";
 
 import AuthContext from "../../auth/context";
-
 import ChatContext from "../../chat/context";
 
 function MyChatListItem({ onListItemClick, allUsers }) {

@@ -5,10 +5,9 @@ import socketIOClient from "socket.io-client";
 import styles from "../../css/cssComponents/chat-box.module.css";
 import ChatBubble from "../chat/ChatBubble";
 import AppForm from "../form/AppForm";
-import SubmitFormButton from "../form/SubmitFormButton";
-import FormTextInput from "../form/FormTextInput";
 import AuthContext from "../../auth/context";
 import ChatContext from "../../chat/context";
+import ChatInput from "./ChatInput";
 
 function MyChatBox({ chatItemClicked }) {
   let currentUser = useContext(AuthContext).user;
@@ -81,28 +80,19 @@ function MyChatBox({ chatItemClicked }) {
         })}
         <AlwaysScrollToBottom />
       </Container>
-      <div className={styles.textInput}>
-        <AppForm
-          initialValues={{
-            text: "",
-            sender: currentUser.username,
-            senderId: currentUser._id,
-            recipient: chatItemClicked.title,
-            //this is a temporary unique ID for all new messages that get added in a session before the db can create the GUID
-            _id: new Date().toString() + Math.random() * 1000,
-          }}
-          onSubmit={handleSubmit}
-        >
-          <form className={styles.bottomSection}>
-            <div className={styles.messageBar}>
-              <FormTextInput  placeholder="message" type="text" name="text" />
-            </div>
-            <div className={styles.buttonContainer}>
-              <SubmitFormButton extraStyle={styles.submitButton} title="Send" />
-            </div>
-          </form>
-        </AppForm>
-      </div>
+      <AppForm
+        initialValues={{
+          text: "",
+          sender: currentUser.username,
+          senderId: currentUser._id,
+          recipient: chatItemClicked.title,
+          //this is a temporary unique ID for all new messages that get added in a session before the db can create the GUID
+          _id: new Date().toString() + Math.random() * 1000,
+        }}
+        onSubmit={handleSubmit}
+      >
+        <ChatInput />
+      </AppForm>
     </div>
   );
 }

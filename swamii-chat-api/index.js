@@ -60,7 +60,7 @@ socketIO.on("connection", (socket) => {
 
   socket.on("partyGroupMessage", async (chatListItem) => {
     //get and return all chatItem from DB
-    console.log(chatListItem)
+  
     const partySpecificMessages = messages.filter((i) => {
       return (
         (i.sender === chatListItem.sender &&
@@ -69,7 +69,7 @@ socketIO.on("connection", (socket) => {
           i.recipient === chatListItem.sender)
       );
     });
-    console.log(partySpecificMessages);
+   
     socketIO.emit("partyGroupMessage", partySpecificMessages);
   });
 });
