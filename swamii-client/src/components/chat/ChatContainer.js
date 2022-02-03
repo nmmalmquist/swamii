@@ -40,6 +40,7 @@ function ChatContainer(props) {
     
   };
 
+
   useEffect(() => {
     setSocket(socketIOClient(BASE_DOMAIN));
     loadUsers();
@@ -63,7 +64,7 @@ function ChatContainer(props) {
         {!chatListVisible && socket && chatItemClicked ? (
           <MyChatBox chatItemClicked={chatItemClicked} />
         ) : null}
-        {newChatVisible && socket ? (<NewChat allUsers={allUsers}/>) : null}
+        {newChatVisible && socket ? (<NewChat returnToChatList={returnToChatList} allUsers={allUsers}/>) : null}
       </div>
     </ChatContext.Provider>
   );

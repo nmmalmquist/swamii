@@ -4,14 +4,14 @@ import {useFormikContext} from 'formik';
 
 //Specifically used in the NewChat Parent
 function FormChatReactSelect({ options, placeholder }) {
-    const {values, setFieldValue } = useFormikContext();
+    const {setFieldValue } = useFormikContext();
 
   const handleSearchChange = (value) => {
       setFieldValue("recipient", value.value)
   };
-  console.log(values)
   return (
     <ReactSelect
+      id="recipientInput"
       onChange={handleSearchChange}
       options={options}
       placeholder={placeholder}

@@ -1,4 +1,32 @@
 .mainContainer{
     height: 300px;
     color: black;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.subContainer{
+        display:flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-end;
+}
+.warningModel{
+    width: 50%;
+    background-color: rgb(224, 222, 222);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    display:   flex;
+    flex-direction: column;
+    border-radius: 3px;
+    padding: 10px;
+}
+.closeModel{
+    width: 100%;
+    text-align: center;
+    border: black solid 1px;
+    border-radius: 3px;
+    cursor: pointer;
 }
