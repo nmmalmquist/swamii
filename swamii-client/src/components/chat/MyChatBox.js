@@ -8,11 +8,12 @@ import AppForm from "../form/AppForm";
 import AuthContext from "../../auth/context";
 import ChatContext from "../../chat/context";
 import ChatInput from "./ChatInput";
+import { chatItemToRoomMessages } from "../../chat/MessageConverter";
 
-function MyChatBox({ chatItemClicked }) {
+function MyChatBox({ chatItemClicked, allMessages }) {
   let currentUser = useContext(AuthContext).user;
-  let { socket } = useContext(ChatContext);
-  const [messages, setMessages] = useState([]);
+  let { socketContext } = useContext(ChatContext);
+  const [roomMessages, setRoomMessages] = useState([]);
 
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef();
@@ -32,32 +33,22 @@ function MyChatBox({ chatItemClicked }) {
 
   const handleSubmit = (newMessage, { resetForm }) => {
     if (newMessage.text === "") return;
-    socket.emit("message", { message: newMessage, user: currentUser });
+    socketContext.emit("privateMessage", { message: newMessage, user: currentUser });
     //reset form/message bar
     resetForm({ values: "" });
 
     //append the messages with a new message, to avoid pinging db again
-    setMessages([...messages, newMessage]);
+    setRoomMessages([...roomMessages, newMessage]);
   };
 
   useEffect(() => {
-    //event handler for messages
-    socket.on("partyGroupMessage", (data) => {
-      setMessages(data);
-    });
-    //initializes the first call to grab data from DB, by making the message "", it will not be added to DB
-    socket.emit("partyGroupMessage", chatItemClicked);
-
-    //on de-mounting
-    return () => {
-      setMessages([]);
-    };
-  }, [socket, currentUser, chatItemClicked]);
+    setRoomMessages(chatItemToRoomMessages(chatItemClicked, allMessages))
+    }, [chatItemClicked, allMessages]);
 
   return (
     <div id="scrollBox" className={styles.all}>
       <Container className={styles.mainContainer}>
-        {messages.sort(compareTo).map((message) => {
+        {roomMessages.sort(compareTo).map((message) => {
           if (message.sender === currentUser.username) {
             return (
               <ChatBubble

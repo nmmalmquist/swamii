@@ -9,9 +9,6 @@ const server = http.createServer(app);
 const socketIO = require("socket.io")(server, { cors: { origin: "*" } });
 const chatDB = require("./database/chat");
 
-//global messages to decrease how many time we hit DB for data
-let messages = [];
-
 // Loads the configuration from .env to process.env
 dotenv.config();
 const PORT = process.env.PORT || 5556;
@@ -30,47 +27,59 @@ app.use(function (err, _req, res) {
   console.error(err.stack);
 });
 
+//this array will be a map of each connected user's username to their socket.id
+let connectedUsers = [];
+
 // makes server a websocket type using socket.io for realtime updating
 socketIO.on("connection", (socket) => {
   console.log("a user is connected");
 
+  socket.on("disconnect", (reason) => {
+    console.log("user disconnected")
+    connectedUsers = connectedUsers.filter((i) => {
+      return i.socketId != socket.id;
+    });
+  });
+
+  socket.on("addUser", (user) => {
+    connectedUsers.push({ username: user.username, socketId: socket.id });
+    console.log(connectedUsers);
+  });
+  //used for debugging. will log any event that happends
+  // socket.onAny((event, ...args) => {
+  //   console.log(event, args);
+  // });
+
+  socket.on("privateMessage", async ({ message, user }) => {
+    if (message || message != "") {
+      await chatDB.saveMessage(message);
+    }
+  
+    let recipientClients = connectedUsers.filter((i) => {
+      
+      return message.recipient == i.username;
+    });
+    if(message.recipient == "Everyone")
+    {
+      recipientClients = connectedUsers
+    }
+    
+    recipientClients.map((i) => {
+      console.log(i.socketId)
+      socket.to(i.socketId).emit("privateMessage", message);
+    });
+  });
+
   //Gets called to update whenever the front end calls (usually to get the first initial pull of messages or to send a new one to update the database)
-  //NOTE: getting the messages is specific to only the signed in user in the front end
-  socket.on("message", async ({ message, user }) => {
+  //NOTE: THIS SHOULD ONLY BE USED FOR PINGING USER SPECIFIC MESSAGES. THIS SHOULD NOT BE PINGED WHEN USER SENDS MESSAGE.
+  socket.on("initMessageGrab", async ({ message, user }) => {
     //first save new message if there is one
     if (message || message != "") {
       await chatDB.saveMessage(message);
     }
     //get and return all messages from DB, while saving a copy on this server
     const allMessages = await chatDB.getAllMessages(user);
-    messages = allMessages;
-    socketIO.emit("message", allMessages);
-
-    //get and return all chatItem from DB
-    //chat items are created by sifting through the messages. these look like the list of recent messages on your imessage homescreen on an iphone
-    const allChatItems = await chatDB.getAllChatItems(allMessages, user);
-    socketIO.emit("chatItem", allChatItems);
-  });
-
-  socket.on("chatItem", async (allMessages) => {
-    //get and return all chatItem from DB
-    const allChatItems = await chatDB.getAllChatItems(allMessages);
-    socketIO.emit("chatItem", allChatItems);
-  });
-
-  socket.on("partyGroupMessage", async (chatListItem) => {
-    //get and return all chatItem from DB
-  
-    const partySpecificMessages = messages.filter((i) => {
-      return (
-        (i.sender === chatListItem.sender &&
-          i.recipient === chatListItem.recipient) ||
-        (i.sender === chatListItem.recipient &&
-          i.recipient === chatListItem.sender)
-      );
-    });
-   
-    socketIO.emit("partyGroupMessage", partySpecificMessages);
+    socketIO.to(socket.id).emit("initMessageGrab", allMessages);
   });
 });
 // start the Express server

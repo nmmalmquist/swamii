@@ -10,7 +10,7 @@ import NeonLogo from "../components/NeonLogo";
 
 function MyNavbar(props) {
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const handleLogout = () => {
     window.localStorage.removeItem("swamiiUserAuthToken");
@@ -41,6 +41,7 @@ function MyNavbar(props) {
           <div className={styles.rightLinksGroup}>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav>
+                {user ? <h6 className={styles.links}>Signed in as <span style={{fontWeight: "bold"}}>{user.username}</span></h6> : null}
                 <h6
                   onClick={() => navigate("/profile")}
                   className={styles.links}

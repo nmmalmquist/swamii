@@ -14,14 +14,14 @@ function NewChat({ allUsers, returnToChatList }) {
   const [invalidRecipient, setInvalidRecipient] = useState(false);
 
   //options for the autocomplete
-  let options = allUsers.map((thisUser) => {
+  let options = [...allUsers.map((thisUser) => {
     return { value: thisUser.username, label: thisUser.username };
-  });
+  }), { value: "Everyone", label: "Everyone" }];
   options = options.filter((thisUser) => thisUser.label !== user.username);
 
   const handleSubmitMessage = (newMessage, { resetForm }) => {
     
-    if(newMessage.recipient == "" || newMessage.text == "")
+    if(newMessage.recipient === "" || newMessage.text === "")
     {
       setInvalidRecipient(true)
       return;
