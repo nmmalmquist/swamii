@@ -11,7 +11,7 @@ var api = new cfb.BettingApi()
 var opts = { 
    //'gameId' : 401282154,// {Number} Game id filter
   'year': 2021, // {Number} Year/season filter for games
-   'week': 14, // {Number} Week filter
+   'week': 13, // {Number} Week filter
 //   'seasonType': "regular", // {String} Season type filter (regular or postseason)
   //'team': "Alabama", // {String} Team
    //'home': "Alabama", // {String} Home team filter
@@ -21,7 +21,7 @@ var opts = {
 api.getLines(opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, function(error) {
-  console.error(error);
+  console.log(error);
 });
 
 api.getLines(opts)

@@ -9,7 +9,7 @@ import FormChatReactSelect from "../form/FormChatReactSelect";
 import ChatInput from "./ChatInput";
 
 function NewChat({ allUsers, returnToChatList }) {
-  let { socket } = useContext(ChatContext);
+  let { socketContext } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
   const [invalidRecipient, setInvalidRecipient] = useState(false);
 
@@ -27,7 +27,7 @@ function NewChat({ allUsers, returnToChatList }) {
       return;
     }
     
-    socket.emit("message", { message: newMessage, user: user });
+    socketContext.emit("privateMessage", { message: newMessage, user: user });
     //reset form/message bar
     resetForm({ values: "" });
     returnToChatList();
